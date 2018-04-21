@@ -38,6 +38,7 @@ module.exports = mail => new Promise((resolv, reject) => {
       }
       file.on('finish', () => {
         parseString(xmlArray.join(''), (error, xml) => {
+          // DMARC XML Schema at : https://tools.ietf.org/html/rfc7489#page-66
           resolv({
             org: xml.feedback.report_metadata.map(item => item.org_name.join(' ')).join(' '),
             report: xml.feedback.record,
